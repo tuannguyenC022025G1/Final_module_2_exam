@@ -70,14 +70,23 @@ public class ContactManager {
 
     // Update contact by phone number
     public boolean updateContact(String phoneNumber, Contact newContact) {
+        if (!isValidContact(newContact)) {
+            System.out.println("Update failed: Invalid contact information.");
+            return false;
+        }
+
         for (int i = 0; i < contactList.size(); i++) {
             if (contactList.get(i).getPhoneNumber().equals(phoneNumber)) {
                 contactList.set(i, newContact);
+                System.out.println("Contact updated successfully.");
                 return true;
             }
         }
+
+        System.out.println("No contact found with the provided phone number.");
         return false;
     }
+
 
     // Delete contact by phone number
     public boolean deleteContact(String phoneNumber) {
